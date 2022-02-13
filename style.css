@@ -3,3 +3,115 @@
     margin: 0;
     box-sizing: border-box;
 }
+body{
+    background-image: url(IMG/ava7patterns_pattern_1850.png);
+}
+
+.container{
+    max-width: 4000px;
+    margin: 0 auto;
+    padding: 5% 10%;
+} 
+
+.cards{
+    display: grid;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.item{
+    width: 100px;
+    height: 140px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all 0.7s linear;
+}
+.item:hover{
+    transform: rotateY(180deg);
+    background-image: url(IMG/back.jpg);
+}
+
+.item1{
+    background-image: url(IMG/82.jpeg);
+}
+.item2{
+    background-image: url(IMG/102.jpeg);
+}
+.item3{
+    background-image: url(IMG/104.jpeg);
+}
+.item3{
+    background-image: url(IMG/72.jpeg);
+}
+.item4{
+    background-image: url(IMG/73.jpeg);
+}
+.item5{
+    background-image: url(IMG/93.jpeg);
+}
+.item6{
+    background-image: url(IMG/94.jpeg);
+}
+.item7{
+    background-image: url(IMG/A1.jpeg);
+}
+.item8{
+    background-image: url(IMG/A3.jpg);
+}
+.item9{
+    background-image: url(IMG/A4.jpg);
+}
+.item10{
+    background-image: url(IMG/K1.jpeg);
+}
+.item11{
+    background-image: url(IMG/K2.jpeg);
+}
+.item12{
+    background-image: url(IMG/K4.jpeg);
+}
+.item13{
+    background-image: url(IMG/Q2.jpeg);
+}
+.item14{
+    background-image: url(IMG/K3.jpeg);
+}
+.item15{
+    background-image: url(IMG/Q4.jpg);
+}
+.item16{
+    background-image: url(IMG/J4.jpeg);
+}
+
+
+
+
+@media screen and (max-width: 900px)  {
+    .container{
+        max-width: 720px;
+    }
+    .cards{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-gap: 10px;
+    }
+}
+
+
+@media screen and (max-width: 460px)  {
+    .container{
+        max-width: 400px;
+        padding: 5%;
+    }
+    .cards{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        grid-gap: 10px;
+    }
+}

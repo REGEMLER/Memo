@@ -27,7 +27,7 @@ const start = () => {
     container.append(info);
 }
 
-start();
+// start();
 container.addEventListener(`click`, function(event){
     if(event.target.className === `btn`){
         event.target.id === `btn1` ? num = 16 : num = 32;
@@ -48,7 +48,7 @@ const generateCard = number => {
 
 const addArrOfCards = () => {
     let arr = [];
-    for(let i = 1; i <= 16; i++){
+    for(let i = 1; i <= 2; i++){
         const cardItemA = generateCard(i);
         const cardItemB = generateCard(i);
         const id = i;
@@ -68,6 +68,10 @@ const addCard = (arr) => {
 
 const handler = (event) => {
 
+    if(ArrOfReversedCards.includes(event.target)){
+        return;
+    }
+
     if(ArrOfReversedCards.length >= 2){
         ArrOfReversedCards[0].className = `item`; 
         ArrOfReversedCards.shift();
@@ -75,7 +79,6 @@ const handler = (event) => {
 
     if(event.target.hasAttribute(`bgNumber`)){
         counter++;
-        const target = cards.find(i => i.id == event.target.id);
         let number = event.target.getAttribute(`bgNumber`);
         event.target.classList.add(`item${number}`);
         const twin = ArrOfReversedCards.find(i => i.className == event.target.className);
@@ -87,7 +90,7 @@ const handler = (event) => {
             const index = ArrOfReversedCards.indexOf(twin);
             ArrOfReversedCards.splice(index-1,1);
             cards.splice(index-1,1);
-            let index1 = cards.indexOf(target);
+            let index1 = cards.indexOf(event.target);
             cards.splice(index1-1,1);
         }
     }
@@ -99,6 +102,7 @@ const handler = (event) => {
         final.append(finalMessage);
         final.classList.add(`congratulations`);
         container.append(final);
+        cardList.removeEventListener(`click`, handler);
     }
 }
 

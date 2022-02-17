@@ -1,163 +1,78 @@
 const container = document.getElementById(`container`);
 const cardList = document.getElementById(`card-list`); 
 let counter = 0; 
-let num;
 const ArrOfReversedCards = [];
 
+//Создание стартового окна
+const createStartTitle = (text) => {
+    const h1 = document.createElement(`H1`);
+    h1.textContent = text;
+    return h1;
+}
+const createStartText = (text) => {
+    const p = document.createElement(`P`); 
+    p.textContent = text;
+    return p; 
+}
 
-const start = () => {
+const createBtn = (name,id) => {
+    const btn = document.createElement(`BUTTON`);
+    btn.classList.add(`btn`);
+    btn.id = id;
+    btn.textContent =  name;
+    return btn;
+}
+const createStartWindow = () => {
     const info = document.createElement(`DIV`);
-    const text = document.createElement(`P`);
-    text.textContent = "Перед Вами появляются карточки разложенные рубашкой вверх, при клике, они перевернутся. Если карточки совпадают - они изчезнут с игрового стола, если нет - перевернутся обратно. Ваша цель угадать все карточки. Выбирайте сложность и удачи! "
-    const title = document.createElement(`H1`);
-    title.textContent = "Добро пожаловать в игру!"
-    const btn1 = document.createElement(`BUTTON`);
-    btn1.id = `btn1`;
-    btn1.textContent = `Easy`
-    btn1.classList.add(`btn`);
-    const btn2 = document.createElement(`BUTTON`);
-    btn2.classList.add(`btn`);
-    btn2.id = `btn2`;
-    btn2.textContent = ` Not Esya`
+    info.id = `info`;
     info.classList.add(`info`);
+    const title = createStartText(`Добро пожаловать в игру!`);
+    const text = createStartText( "Перед Вами появляются карточки разложенные рубашкой вверх, при клике по карточкам они будут переворачиваться. Помните, что одновременно на экране не может быть больше двух перевернутых карточек. Если карточки совпадают - они изчезнут с игрового стола. Ваша цель отыскать все карточки. Выбирайте сложность и удачи!");
+    const btn1 = createBtn("Easy", 16);
+    const btn2 = createBtn("Normal", 32);
+    const btn3 = createBtn("Hard", 64);
     info.append(title);
     info.append(text);
     info.append(btn1);
     info.append(btn2);
+    info.append(btn3);
     container.append(info);
-}
-
-// start();
-container.addEventListener(`click`, function(event){
-    if(event.target.className === `btn`){
-        event.target.id === `btn1` ? num = 16 : num = 32;
-        event.target.display = `none`;
-        console.log(num)
-    }
-})
-
-
-const generateCard = number => {
-    const card = document.createElement(`DIV`);
-    card.classList.add(`item`); 
-    card.setAttribute("bgNumber", number)
-    return card;
+    return info;
 }
 
 
 
-const addArrOfCards = () => {
-    let arr = [];
-    for(let i = 1; i <= 2; i++){
-        const cardItemA = generateCard(i);
-        const cardItemB = generateCard(i);
-        const id = i;
-        cardItemA.id = id;  
-        cardItemB.id = id + 100;
-        arr.push(cardItemA,cardItemB);
-    }
-     return arr.sort(()=> Math.random()-0.5)
-}
-
-const addCard = (arr) => {
-    arr.forEach(element => {
-        cardList.append(element);
-    });
-}
- 
-
-const handler = (event) => {
-
-    if(ArrOfReversedCards.includes(event.target)){
-        return;
-    }
-
-    if(ArrOfReversedCards.length >= 2){
-        ArrOfReversedCards[0].className = `item`; 
-        ArrOfReversedCards.shift();
-    }
-
-    if(event.target.hasAttribute(`bgNumber`)){
-        counter++;
-        let number = event.target.getAttribute(`bgNumber`);
-        event.target.classList.add(`item${number}`);
-        const twin = ArrOfReversedCards.find(i => i.className == event.target.className);
-        ArrOfReversedCards.push(event.target);
-        if(twin){
-            event.target.classList.add(`item-checked`);
-            ArrOfReversedCards.pop();
-            twin.classList.add(`item-checked`);
-            const index = ArrOfReversedCards.indexOf(twin);
-            ArrOfReversedCards.splice(index-1,1);
-            cards.splice(index-1,1);
-            let index1 = cards.indexOf(event.target);
-            cards.splice(index1-1,1);
+const startGame = (event) => {
+    if(event.target.hasAttribute(`id`)){
+        const numberOfCards = event.target.id;
+        const info = document.getElementById(`info`);
+        const cardList = document.createElement(`DIV`);
+        if(numberOfCards === 16 || numberOfCards === 32){
+            cardList.classList.add(`card-list`);
         }
+        if(numberOfCards === 64){
+            cardList.classList.add(`card-list-big`);
+        }
+        info.remove();
+        container.append(cardList);
+        let cards =  addArrOfCards(numberOfCards);
+        return cards();
     }
 
-    if(cards.length === 0){
-        const final = document.createElement(`DIV`);
-        const finalMessage = document.createElement(`P`);
-        finalMessage.textContent = `Поздравляем! Вы прошли игру за ${counter} ходов`;
-        final.append(finalMessage);
-        final.classList.add(`congratulations`);
-        container.append(final);
-        cardList.removeEventListener(`click`, handler);
-    }
 }
-
-const cards = addArrOfCards();
-addCard(cards);
-cardList.addEventListener(`click`, handler);
+///////////////////////////////////////////////////////////////////////
 
 
 
 
-
-
-
-
-
-
-////////////////////////////////////////////////////////// Нерабочий вариант с атрибутами
+// Вариант с классами
 // const generateCard = number => {
 //     const card = document.createElement(`DIV`);
 //     card.classList.add(`item`); 
-//     card.dataset.bgnumber = `100`;
+//     card.setAttribute("bgNumber", number)
 //     return card;
 // }
 
-// const handler = (event) => {
-
-//     if(ArrOfReversedCards.length >= 2){
-//         ArrOfReversedCards[0].dataset.bgnumber = `100`;
-//         ArrOfReversedCards.shift();
-//     }
-
-//     if(event.target.classList.contains("item")){
-//         counter++;
-//         const target = cards.find(i => i.id == event.target.id);
-//         let number = event.target.order;
-//         event.target.dataset.bgnumber = number;
-//         const twin = ArrOfReversedCards.find(i => i.order  == event.target.order);
-//         ArrOfReversedCards.push(event.target);
-//         console.log(cards);
-//         if(twin){
-//             event.target.dataset.bgnumber = `0`;
-//             ArrOfReversedCards.pop();
-//             twin.dataset.bgnumber = `0`;
-//             const index = ArrOfReversedCards.indexOf(twin);
-//             ArrOfReversedCards.splice(index-1,1);
-//             cards.splice(index-1,1);
-//             let index1 = cards.indexOf(target);
-//             cards.splice(index1-1,1);
-//         }
-//     }
-
-//     if(cards.length === 0){
-//         alert(`Вы нашли все карточки за ${counter} ходов`)
-//     }
-// }
 
 // const addArrOfCards = () => {
 //     let arr = [];
@@ -167,9 +82,196 @@ cardList.addEventListener(`click`, handler);
 //         const id = i;
 //         cardItemA.id = id;  
 //         cardItemB.id = id + 100;
-//         cardItemA.order = i;  
-//         cardItemB.order = i;
 //         arr.push(cardItemA,cardItemB);
 //     }
-//     return arr.sort(()=> Math.random()-0.5)
+//      let arrSort =  arr.sort(()=> Math.random()-0.5);
+//      arrSort.forEach(element => {
+//         cardList.append(element);
+//     });
+//     return arrSort;
 // }
+
+
+ 
+
+// const handler = (event) => {
+//     if(ArrOfReversedCards.includes(event.target) || cards.includes(!event.target)){
+//         return;
+//     }
+//     if(ArrOfReversedCards.length >= 2){
+//         checkReversed();
+//     }
+
+//     if(event.target.hasAttribute(`bgNumber`)){
+//         counter++;
+//         let number = event.target.getAttribute(`bgNumber`);
+//         event.target.classList.add(`item${number}`);
+//         const twin = ArrOfReversedCards.find(i => i.className == event.target.className);
+//         ArrOfReversedCards.push(event.target);
+//         if(twin){
+//             event.target.classList.add(`item-checked`);
+//             ArrOfReversedCards.pop();
+//             twin.classList.add(`item-checked`);
+//             const index = ArrOfReversedCards.indexOf(twin);
+//             ArrOfReversedCards.splice(index-1,1);
+//             cards.splice(index-1,1);
+//             let index1 = cards.indexOf(event.target);
+//             cards.splice(index1-1,1);
+//         }
+//     }
+//     if(cards.length === 0){
+//         showCongratulations();
+//     }
+// }
+
+// const showCongratulations = () =>{
+//     const final = document.createElement(`DIV`);
+//     final.id = `final`;
+//     const btn = document.createElement(`BUTTON`);
+//     btn.classList.add(`restart`);
+//     btn.textContent = `Новая игра`;
+//     const finalMessage = document.createElement(`P`);
+//     finalMessage.textContent = `Поздравляем! Вы прошли игру за ${counter} ходов`;
+//     final.append(finalMessage);
+//     final.append(btn);
+//     final.classList.add(`congratulations`);
+//     container.append(final);
+//     cardList.removeEventListener(`click`, handler);
+//     counter = 0;
+//     ArrOfReversedCards.length = 0;
+
+// }
+
+// const checkReversed = () => {
+//     ArrOfReversedCards[0].className = `item`; 
+//     ArrOfReversedCards.shift();
+// }
+
+// const restart = (event) => {
+//     if(event.target.classList.contains(`restart`)){
+//         const final = document.getElementById(`final`);
+//         const rest = document.getElementsByClassName(`item`);
+//         let arr = [...rest];
+//         final.remove();
+//         arr.forEach(item => item.remove());
+//         cardList.addEventListener(`click`, handler);
+//         cards =  addArrOfCards();
+//     }
+// }
+
+
+// Обработчики 
+// cardList.addEventListener(`click`, handler);
+// container.addEventListener(`click`,restart)
+// container.addEventListener(`click`,startGame);
+// let cards = addArrOfCards();
+// createStartWindow();
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////// рабочий вариант с атрибутами
+const generateCard = number => {
+    const card = document.createElement(`DIV`);
+    card.classList.add(`item`); 
+    card.dataset.bgnumber = `100`;
+    return card;
+}
+
+
+const addArrOfCards = () => {
+    let arr = [];
+    for(let i = 1; i <= 4; i++){
+        const cardItemA = generateCard(i);
+        const cardItemB = generateCard(i);
+        const id = i;
+        cardItemA.id = id;  
+        cardItemB.id = id + 100;
+        cardItemA.dataset.order = i;  
+        cardItemB.dataset.order = i;
+        arr.push(cardItemA,cardItemB);
+    }
+    let arrSort =  arr.sort(()=> Math.random()-0.5);
+    arrSort.forEach(element => {
+        cardList.append(element);
+    });
+    return arrSort;
+    }
+
+
+const handler = (event) => {
+    if(ArrOfReversedCards.includes(event.target) || event.target.dataset.bgnumber ===`0`){
+        return;
+    }
+
+    if(ArrOfReversedCards.length >= 2){
+        checkReversed();
+    }
+
+    if(event.target.hasAttribute("data-order")){
+        counter++;
+        let order = event.target.getAttribute(`data-order`);
+        event.target.dataset.bgnumber = order;
+        const twin = ArrOfReversedCards.find(i => i.dataset.order  === order);
+        ArrOfReversedCards.push(event.target);
+        if(twin){
+            event.target.dataset.bgnumber = `0`;
+            ArrOfReversedCards.pop();
+            twin.dataset.bgnumber = `0`;
+            const index = ArrOfReversedCards.indexOf(twin);
+            ArrOfReversedCards.splice(index-1,1);
+            cards.splice(index-1,1);
+            let index1 = cards.indexOf(event.target);
+            cards.splice(index1-1,1);
+        }
+    }
+    if(cards.length === 0){
+        showCongratulations();
+    }
+}
+
+const showCongratulations = () =>{
+    const final = document.createElement(`DIV`);
+    final.id = `final`;
+    const btn = document.createElement(`BUTTON`);
+    btn.classList.add(`restart`);
+    btn.textContent = `Новая игра`;
+    const finalMessage = document.createElement(`P`);
+    finalMessage.textContent = `Поздравляем! Вы прошли игру за ${counter} ходов`;
+    final.append(finalMessage);
+    final.append(btn);
+    final.classList.add(`congratulations`);
+    container.append(final);
+    cardList.removeEventListener(`click`, handler);
+    counter = 0;
+    ArrOfReversedCards.length = 0;
+}
+
+const checkReversed = () => {
+    ArrOfReversedCards[0].dataset.bgnumber = `100`; 
+    ArrOfReversedCards.shift();
+}
+
+const restart = (event) => {
+    if(event.target.classList.contains(`restart`)){
+        const final = document.getElementById(`final`);
+        const rest = document.getElementsByClassName(`item`);
+        let arr = [...rest];
+        final.remove();
+        arr.forEach(item => item.remove());
+        cardList.addEventListener(`click`, handler);
+        cards =  addArrOfCards();
+    }
+}
+
+
+cardList.addEventListener(`click`, handler);
+container.addEventListener(`click`,restart)
+// container.addEventListener(`click`,startGame);
+let cards = addArrOfCards();
+// createStartWindow();

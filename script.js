@@ -164,8 +164,8 @@ const showCongratulations = () =>{
 
 //Запускается когда открыто больше двух карточек
 const checkReversed = () => {
-    ArrOfReversedCards[0].dataset.bgnumber = `100`; 
-    ArrOfReversedCards.shift();
+    ArrOfReversedCards.forEach(item => item.dataset.bgnumber = `100`);
+    ArrOfReversedCards.length = 0;
 }
 
 

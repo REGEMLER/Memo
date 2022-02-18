@@ -89,67 +89,7 @@ body{
 .item:hover{
     box-shadow: 20px 10px 8px -5px ;
 }
-.item1, .item2, .item3, .item4, .item5, .item6, .item7, .item8, .item9, .item10, .item11, .item12, .item13, .item14, .item15, .item16{
-    transform: rotateY(180deg);
-}
 
-
-.item1{
-    background-image: url(IMG/82.jpeg);
-}
-.item2{
-    background-image: url(IMG/102.jpeg);
-}
-.item3{
-    background-image: url(IMG/104.jpeg);
-}
-.item4{
-    background-image: url(IMG/73.jpeg);
-}
-.item5{
-    background-image: url(IMG/93.jpeg);
-}
-.item6{
-    background-image: url(IMG/94.jpeg);
-}
-.item7{
-    background-image: url(IMG/A1.jpeg);
-}
-.item8{
-    background-image: url(IMG/A3.jpg);
-}
-.item9{
-    background-image: url(IMG/A4.jpg);
-}
-.item10{
-    background-image: url(IMG/K1.jpeg);
-}
-.item11{
-    background-image: url(IMG/K2.jpeg);
-}
-.item12{
-    background-image: url(IMG/K4.jpeg);
-}
-.item13{
-    background-image: url(IMG/Q2.jpeg);
-}
-.item14{
-    background-image: url(IMG/K3.jpeg);
-}
-.item15{
-    background-image: url(IMG/Q4.jpg);
-}
-.item16{
-    background-image: url(IMG/J4.jpeg);
-}
-
-.item-checked{
-    background: transparent;
-} 
-
-
-
-/* Вариант с атрибутами   */
 .item[data-bgNumber="100"]{
     background-image: url(IMG/back.jpg);
 }
@@ -226,19 +166,6 @@ body{
     background: transparent;
     background-image: transparent; 
 }
-
-
-
-
- 
-
-
-
-
-
-
-
-
 
 
 /* ----------------Финальное окно------------------- */
@@ -360,3 +287,66 @@ body{
         height: auto;
     }
 }
+
+
+
+
+
+/* 
+.item1, .item2, .item3, .item4, .item5, .item6, .item7, .item8, .item9, .item10, .item11, .item12, .item13, .item14, .item15, .item16{
+    transform: rotateY(180deg);
+}
+
+
+.item1{
+    background-image: url(IMG/82.jpeg);
+}
+.item2{
+    background-image: url(IMG/102.jpeg);
+}
+.item3{
+    background-image: url(IMG/104.jpeg);
+}
+.item4{
+    background-image: url(IMG/73.jpeg);
+}
+.item5{
+    background-image: url(IMG/93.jpeg);
+}
+.item6{
+    background-image: url(IMG/94.jpeg);
+}
+.item7{
+    background-image: url(IMG/A1.jpeg);
+}
+.item8{
+    background-image: url(IMG/A3.jpg);
+}
+.item9{
+    background-image: url(IMG/A4.jpg);
+}
+.item10{
+    background-image: url(IMG/K1.jpeg);
+}
+.item11{
+    background-image: url(IMG/K2.jpeg);
+}
+.item12{
+    background-image: url(IMG/K4.jpeg);
+}
+.item13{
+    background-image: url(IMG/Q2.jpeg);
+}
+.item14{
+    background-image: url(IMG/K3.jpeg);
+}
+.item15{
+    background-image: url(IMG/Q4.jpg);
+}
+.item16{
+    background-image: url(IMG/J4.jpeg);
+}
+
+.item-checked{
+    background: transparent;
+}  */

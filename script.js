@@ -66,8 +66,6 @@ const startGame = (event) => {
 }
 
 
-
-
 //Создание одной карточки 
 const generateCard = () => {
     const card = document.createElement(`DIV`);
@@ -120,19 +118,19 @@ const handler = (event) => {
     if(ArrOfReversedCards.includes(event.target) || event.target.dataset.bgnumber ===`0`){
         return;
     }
-
     if(event.target.hasAttribute("data-order")){
-        if(ArrOfReversedCards.length >= 2){
-            checkReversed();
-        }
+         if(ArrOfReversedCards.length >= 2){
+             checkReversed();
+         }
         counter++;
         let order = event.target.getAttribute(`data-order`);
         event.target.dataset.bgnumber = order;
         const twin = ArrOfReversedCards.find(i => i.dataset.order  === order);
-        ArrOfReversedCards.push(event.target);
+        if(!twin){
+            ArrOfReversedCards.push(event.target);
+        }
         if(twin){
             event.target.dataset.bgnumber = `0`;
-            ArrOfReversedCards.pop();
             twin.dataset.bgnumber = `0`;
             const index = ArrOfReversedCards.indexOf(twin);
             ArrOfReversedCards.splice(index-1,1);
@@ -191,115 +189,3 @@ container.addEventListener(`click`,restart)
 container.addEventListener(`click`,startGame);
 //Первый запуск 
 createStartWindow();
-
-
-
-
-
-
-
-
-// Вариант с классами
-// const generateCard = number => {
-//     const card = document.createElement(`DIV`);
-//     card.classList.add(`item`); 
-//     card.setAttribute("bgNumber", number)
-//     return card;
-// }
-
-
-// const addArrOfCards = () => {
-//     let arr = [];
-//     for(let i = 1; i <= 4; i++){
-//         const cardItemA = generateCard(i);
-//         const cardItemB = generateCard(i);
-//         const id = i;
-//         cardItemA.id = id;  
-//         cardItemB.id = id + 100;
-//         arr.push(cardItemA,cardItemB);
-//     }
-//      let arrSort =  arr.sort(()=> Math.random()-0.5);
-//      arrSort.forEach(element => {
-//         cardList.append(element);
-//     });
-//     return arrSort;
-// }
-
-
- 
-
-// const handler = (event) => {
-//     if(ArrOfReversedCards.includes(event.target) || cards.includes(!event.target)){
-//         return;
-//     }
-//     if(ArrOfReversedCards.length >= 2){
-//         checkReversed();
-//     }
-
-//     if(event.target.hasAttribute(`bgNumber`)){
-//         counter++;
-//         let number = event.target.getAttribute(`bgNumber`);
-//         event.target.classList.add(`item${number}`);
-//         const twin = ArrOfReversedCards.find(i => i.className == event.target.className);
-//         ArrOfReversedCards.push(event.target);
-//         if(twin){
-//             event.target.classList.add(`item-checked`);
-//             ArrOfReversedCards.pop();
-//             twin.classList.add(`item-checked`);
-//             const index = ArrOfReversedCards.indexOf(twin);
-//             ArrOfReversedCards.splice(index-1,1);
-//             cards.splice(index-1,1);
-//             let index1 = cards.indexOf(event.target);
-//             cards.splice(index1-1,1);
-//         }
-//     }
-//     if(cards.length === 0){
-//         showCongratulations();
-//     }
-// }
-
-// const showCongratulations = () =>{
-//     const final = document.createElement(`DIV`);
-//     final.id = `final`;
-//     const btn = document.createElement(`BUTTON`);
-//     btn.classList.add(`restart`);
-//     btn.textContent = `Новая игра`;
-//     const finalMessage = document.createElement(`P`);
-//     finalMessage.textContent = `Поздравляем! Вы прошли игру за ${counter} ходов`;
-//     final.append(finalMessage);
-//     final.append(btn);
-//     final.classList.add(`congratulations`);
-//     container.append(final);
-//     cardList.removeEventListener(`click`, handler);
-//     counter = 0;
-//     ArrOfReversedCards.length = 0;
-
-// }
-
-// const checkReversed = () => {
-//     ArrOfReversedCards[0].className = `item`; 
-//     ArrOfReversedCards.shift();
-// }
-
-// const restart = (event) => {
-//     if(event.target.classList.contains(`restart`)){
-//         const final = document.getElementById(`final`);
-//         const rest = document.getElementsByClassName(`item`);
-//         let arr = [...rest];
-//         final.remove();
-//         arr.forEach(item => item.remove());
-//         cardList.addEventListener(`click`, handler);
-//         cards =  addArrOfCards();
-//     }
-// }
-
-
-// Обработчики 
-// cardList.addEventListener(`click`, handler);
-// container.addEventListener(`click`,restart)
-// container.addEventListener(`click`,startGame);
-// let cards = addArrOfCards();
-// createStartWindow();
-
-
-

@@ -81,7 +81,6 @@ body{
     height: 140px;
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-image: url(IMG/back.jpg); */
     border: 4px solid black;
     border-radius: 3px;
     transition: all 0.5s linear;
@@ -200,7 +199,7 @@ body{
     width: 120px;
     height: 60px;
     color: black;
-    background-color: rgb(0, 255, 13);
+    background-image: url(IMG/ava7patterns_pattern_1875.png);
     text-transform: uppercase;
     border: none;
     outline: none;
@@ -241,7 +240,6 @@ body{
         padding: 10px;
         font-size: 28px;
         line-height: 50px;
-        outline: 1px solid red;
     }
     .info{
         width: 400px;

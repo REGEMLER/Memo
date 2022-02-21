@@ -1,47 +1,11 @@
+import {generateCard,addArrOfCards,addArrOfCardsHard} from "./cards.js";
+import {createStartTitle,createStartText,createBtn,createStartWindow} from "./start.js";
 //Глобальные переменные 
 const container = document.getElementById(`container`);
 const cardList = document.getElementById(`card-list`); 
 let counter = 0; 
 const ArrOfReversedCards = [];
 let cards = [];
-
-//Создание стартового окна
-const createStartTitle = (text) => {
-    const h1 = document.createElement(`H1`);
-    h1.textContent = text;
-    return h1;
-}
-const createStartText = (text) => {
-    const p = document.createElement(`P`); 
-    p.textContent = text;
-    return p; 
-}
-
-const createBtn = (name,id) => {
-    const btn = document.createElement(`BUTTON`);
-    btn.classList.add(`btn`);
-    btn.id = id;
-    btn.textContent =  name;
-    return btn;
-}
-const createStartWindow = () => {
-    const info = document.createElement(`DIV`);
-    info.id = `info`;
-    info.classList.add(`info`);
-    const title = createStartText(`Добро пожаловать в игру!`);
-    const text = createStartText( "Перед Вами появляются карточки разложенные рубашкой вверх, при клике по карточкам они будут переворачиваться. Помните, что одновременно на экране не может быть больше двух перевернутых карточек. Если карточки совпадают - они изчезнут с игрового стола. Ваша цель отыскать все карточки. Выбирайте сложность и удачи!");
-    const btn1 = createBtn("Easy", 8);
-    const btn2 = createBtn("Normal", 16);
-    const btn3 = createBtn("Hard", 32);
-    info.append(title);
-    info.append(text);
-    info.append(btn1);
-    info.append(btn2);
-    info.append(btn3);
-    container.append(info);
-    return info;
-}
-
 
 const startGame = (event) => {
     if(event.target.hasAttribute(`id`)){
@@ -63,54 +27,6 @@ const startGame = (event) => {
         }
     }
 
-}
-
-
-//Создание одной карточки 
-const generateCard = () => {
-    const card = document.createElement(`DIV`);
-    card.classList.add(`item`); 
-    card.dataset.bgnumber = `100`;
-    return card;
-}
-
-//Создание колоды карт на 16 или 32 карты
-const addArrOfCards = (n) => {
-    let arr = [];
-    for(let i = 1; i <= n; i++){
-        const cardItemA = generateCard();
-        const cardItemB = generateCard();
-        cardItemA.dataset.order = i;  
-        cardItemB.dataset.order = i;
-        arr.push(cardItemA,cardItemB);
-    }
-     let arrSort =  arr.sort(()=> Math.random()-0.5);
-    arrSort.forEach(element => {
-        cardList.append(element);
-    });
-    return arrSort;
-}
-
-
-//Создание колоды карт на 64
-const addArrOfCardsHard = () => {
-    let arr = [];
-    for(let i = 1; i <= 16; i++){
-        const cardItemA = generateCard(i);
-        const cardItemB = generateCard(i);
-        const cardItemC = generateCard(i);
-        const cardItemD = generateCard(i);
-        cardItemA.dataset.order = i;  
-        cardItemB.dataset.order = i;
-        cardItemC.dataset.order = i;
-        cardItemD.dataset.order = i;
-        arr.push(cardItemA,cardItemB,cardItemC,cardItemD);
-    }
-    let arrSort =  arr.sort(()=> Math.random()-0.5);
-    arrSort.forEach(element => {
-        cardList.append(element);
-    });
-        return arrSort;
 }
 
 //Ход игры
@@ -174,6 +90,7 @@ const restart = (event) => {
     if(event.target.classList.contains(`restart`)){
         const final = document.getElementById(`final`);
         const rest = document.getElementsByClassName(`item`);
+        const cardList = document.getElementById(`card-list`);
         let arr = [...rest];
         final.remove();
         arr.forEach(item => item.remove());

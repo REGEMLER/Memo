@@ -26,10 +26,8 @@ const startGame = (event) => {
             cards =  addArrOfCards(numberOfCards);
         }
     }
-
 }
 
-//Ход игры
 const handler = (event) => {
     if(ArrOfReversedCards.includes(event.target) || event.target.dataset.bgnumber ===`0`){
         return;
@@ -95,7 +93,6 @@ const restart = (event) => {
         final.remove();
         arr.forEach(item => item.remove());
         cardList.addEventListener(`click`, handler);
-        // cards =  addArrOfCards();
         createStartWindow();
     }
 }

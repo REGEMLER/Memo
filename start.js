@@ -34,4 +34,5 @@ const createStartWindow = () => {
     return info;
 }
 
+
 export {createStartTitle,createStartText,createBtn,createStartWindow};

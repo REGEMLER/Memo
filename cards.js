@@ -48,5 +48,3 @@ const addArrOfCardsHard = () => {
 }
 
 export {generateCard,addArrOfCards,addArrOfCardsHard};
-
-

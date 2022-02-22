@@ -1,5 +1,6 @@
 import {generateCard,addArrOfCards,addArrOfCardsHard} from "./cards.js";
 import {createStartTitle,createStartText,createBtn,createStartWindow} from "./start.js";
+import {showCongratulations,checkReversed} from "./events.js";
 //Глобальные переменные 
 const container = document.getElementById(`container`);
 const cardList = document.getElementById(`card-list`); 
@@ -34,7 +35,8 @@ const handler = (event) => {
     }
     if(event.target.hasAttribute("data-order")){
          if(ArrOfReversedCards.length >= 2){
-             checkReversed();
+             const check = checkReversed();
+             check(ArrOfReversedCards);
          }
         counter++;
         let order = event.target.getAttribute(`data-order`);
@@ -54,38 +56,15 @@ const handler = (event) => {
         }
     }
     if(cards.length === 0){
-        showCongratulations();
+        const show = showCongratulations();
+        show(ArrOfReversedCards,handler,counter);
     }
 }
-
-//Запускается, после того, как игрок нашел все карточки
-const showCongratulations = () =>{
-    const final = document.createElement(`DIV`);
-    final.id = `final`;
-    const btn = document.createElement(`BUTTON`);
-    btn.classList.add(`restart`);
-    btn.textContent = `Новая игра`;
-    const finalMessage = document.createElement(`P`);
-    finalMessage.textContent = `Поздравляем! Вы прошли игру за ${counter} ходов`;
-    final.append(finalMessage);
-    final.append(btn);
-    final.classList.add(`congratulations`);
-    container.append(final);
-    cardList.removeEventListener(`click`, handler);
-    counter = 0;
-    ArrOfReversedCards.length = 0;
-}
-
-//Запускается когда открыто больше двух карточек
-const checkReversed = () => {
-    ArrOfReversedCards.forEach(item => item.dataset.bgnumber = `100`);
-    ArrOfReversedCards.length = 0;
-}
-
 
 //Запускается, когда игрок захочет сыграть еще раз
 const restart = (event) => {
     if(event.target.classList.contains(`restart`)){
+        counter = 0;
         const final = document.getElementById(`final`);
         const rest = document.getElementsByClassName(`item`);
         const cardList = document.getElementById(`card-list`);

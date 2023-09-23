@@ -218,11 +218,14 @@ body {
     top: 50%;
     left: 50%;
     background-color: #ccc;
+    background-image: url(IMG/ava7patterns_wallpaper_800x600_1876.png);
+    background-repeat: no-repeat;
     font-size: 1.2rem;
     border-radius: 5px;
     opacity: 0;
     text-align: justify;
     visibility: hidden;
+    z-index: -1;
 }
 
 .results::after {
@@ -235,6 +238,7 @@ body {
 
 .results li {
     margin-bottom: 10px;
+    list-style: none;
 }
 
 .results-visible {

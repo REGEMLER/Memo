@@ -26,6 +26,7 @@ const createStartWindow = () => {
     const btn2 = createBtn("Normal", 16);
     const btn3 = createBtn("Hard", 32);
     const btn4 = createBtn("Results", 1000);
+    const results = createResults();
     info.append(title);
     info.append(text);
     info.append(btn1);
@@ -33,7 +34,14 @@ const createStartWindow = () => {
     info.append(btn3);
     info.append(btn4);
     container.append(info);
+    container.append(results);
     return info;
+}
+
+const createResults = () => {
+    const ul = document.createElement(`ul`);
+    ul.classList.add(`results`);
+    return ul; 
 }
 
 

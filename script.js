@@ -1,6 +1,8 @@
 import {addArrOfCards, addArrOfCardsHard} from "./cards.js";
 import {createStartWindow} from "./start.js";
-import {showCongratulations, checkReversed} from "./events.js";
+import {showCongratulations, checkReversed, showResults} from "./events.js";
+import {setResult} from "./localStarage.js";
+
 //Глобальные переменные 
 const container = document.getElementById(`container`);
 const cardList = document.getElementById(`card-list`); 
@@ -9,10 +11,14 @@ const ArrOfReversedCards = [];
 let cards = [];
 
 const startGame = (event) => {
-    if(event.target.hasAttribute(`id`)){
+    if(event.target.hasAttribute(`id`) && event.target.tagName === "BUTTON"){
         const numberOfCards = event.target.id;
         const info = document.getElementById(`info`);
         const cardList = document.getElementById(`card-list`); 
+        if(numberOfCards == 1000) {
+            showResults(); 
+            return;
+        }
         if(numberOfCards == 8 || numberOfCards == 16){
             cardList.className = `card-list`;
         }
@@ -26,11 +32,13 @@ const startGame = (event) => {
         if(cardList.classList.contains(`card-list`)){
             cards =  addArrOfCards(numberOfCards);
         }
+    } else {
+        return false;
     }
 }
 container.addEventListener(`click`, startGame);
 
-const handler = (event) => {
+const clickCard = (event) => {
     if(ArrOfReversedCards.includes(event.target) || event.target.dataset.bgnumber ===`0`){
         return;
     }
@@ -57,11 +65,12 @@ const handler = (event) => {
         }
     }
     if(cards.length === 0){
+        setResult(counter);
         const show = showCongratulations();
-        show(ArrOfReversedCards,handler,counter);
+        show(ArrOfReversedCards, clickCard, counter);
     }
 }
-cardList.addEventListener(`click`, handler);
+cardList.addEventListener(`click`, clickCard);
 
 //Запускается, когда игрок захочет сыграть еще раз
 const restart = (event) => {
@@ -73,8 +82,10 @@ const restart = (event) => {
         let arr = [...rest];
         final.remove();
         arr.forEach(item => item.remove());
-        cardList.addEventListener(`click`, handler);
+        cardList.addEventListener(`click`, clickCard);
         createStartWindow();
+    } else {
+        return false;
     }
 }
 container.addEventListener(`click`, restart);

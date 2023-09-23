@@ -24,7 +24,6 @@ const addArrOfCards = (n) => {
     return arrSort;
 }
 
-
 //Создание колоды карт на 64
 const addArrOfCardsHard = () => {
     const cardList = document.getElementById("card-list");
@@ -47,4 +46,4 @@ const addArrOfCardsHard = () => {
         return arrSort;
 }
 
-export {generateCard,addArrOfCards,addArrOfCardsHard};
+export {generateCard, addArrOfCards, addArrOfCardsHard};

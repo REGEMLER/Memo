@@ -1,6 +1,6 @@
-import {generateCard,addArrOfCards,addArrOfCardsHard} from "./cards.js";
-import {createStartTitle,createStartText,createBtn,createStartWindow} from "./start.js";
-import {showCongratulations,checkReversed} from "./events.js";
+import {addArrOfCards, addArrOfCardsHard} from "./cards.js";
+import {createStartWindow} from "./start.js";
+import {showCongratulations, checkReversed} from "./events.js";
 //Глобальные переменные 
 const container = document.getElementById(`container`);
 const cardList = document.getElementById(`card-list`); 
@@ -28,6 +28,7 @@ const startGame = (event) => {
         }
     }
 }
+container.addEventListener(`click`, startGame);
 
 const handler = (event) => {
     if(ArrOfReversedCards.includes(event.target) || event.target.dataset.bgnumber ===`0`){
@@ -60,6 +61,7 @@ const handler = (event) => {
         show(ArrOfReversedCards,handler,counter);
     }
 }
+cardList.addEventListener(`click`, handler);
 
 //Запускается, когда игрок захочет сыграть еще раз
 const restart = (event) => {
@@ -75,10 +77,7 @@ const restart = (event) => {
         createStartWindow();
     }
 }
+container.addEventListener(`click`, restart);
 
-//Слушатели
-cardList.addEventListener(`click`, handler);
-container.addEventListener(`click`,restart)
-container.addEventListener(`click`,startGame);
 //Первый запуск 
 createStartWindow();

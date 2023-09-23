@@ -1,5 +1,5 @@
 const showCongratulations = () =>{
-    return function (ArrOfReversedCards,handler,counter) {
+    return function (ArrOfReversedCards, handler, counter) {
         const final = document.createElement(`DIV`);
         final.id = `final`;
         const btn = document.createElement(`BUTTON`);
@@ -23,4 +23,4 @@ const checkReversed = () => {
     }
 }
 
-export {showCongratulations,checkReversed};
+export {showCongratulations, checkReversed};

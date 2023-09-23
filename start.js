@@ -25,14 +25,16 @@ const createStartWindow = () => {
     const btn1 = createBtn("Easy", 8);
     const btn2 = createBtn("Normal", 16);
     const btn3 = createBtn("Hard", 32);
+    const btn4 = createBtn("Results", 1000);
     info.append(title);
     info.append(text);
     info.append(btn1);
     info.append(btn2);
     info.append(btn3);
+    info.append(btn4);
     container.append(info);
     return info;
 }
 
 
-export {createStartTitle,createStartText,createBtn,createStartWindow};
+export {createStartTitle, createStartText, createBtn, createStartWindow};

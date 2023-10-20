@@ -8,6 +8,13 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+audio {
+    position: absolute;
+    z-index: -1;
+    visibility: hidden;
+    opacity: 0;
+}
+
 .container {
     max-width: 2000px;
     margin: 0 auto;
@@ -48,6 +55,7 @@ body {
     border: none;
     outline: none;
     border-radius: 5px;
+    cursor: pointer;
     transition: all .4s linear;
 }
 .btn:hover {
@@ -202,9 +210,10 @@ body {
     border: none;
     outline: none;
     border-radius: 5px;
+    cursor: pointer;
     transition: all .4s linear;
 }
-.btn:hover {
+.restart:hover {
     transform: scale(1.1);
 }
 

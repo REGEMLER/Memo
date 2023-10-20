@@ -17,7 +17,7 @@ const addArrOfCards = (n) => {
         cardItemB.dataset.order = i;
         arr.push(cardItemA,cardItemB);
     }
-     let arrSort =  arr.sort(()=> Math.random()-0.5);
+    let arrSort =  arr.sort(()=> Math.random()-0.5);
     arrSort.forEach(element => {
         cardList.append(element);
     });

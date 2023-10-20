@@ -1,4 +1,4 @@
-import {getResults} from "./localStarage.js";
+import {getResults} from "./localStorage.js";
 
 const showCongratulations = () =>{
     return function (ArrOfReversedCards, handler, counter) {
@@ -13,16 +13,17 @@ const showCongratulations = () =>{
         final.append(btn);
         final.classList.add(`congratulations`);
         container.append(final);
+        const cardList = document.getElementById(`card-list`); 
         cardList.removeEventListener(`click`, handler);
         ArrOfReversedCards.length = 0;
     }
 }
 
-const checkReversed = () => {
-    return function(ArrOfReversedCards){
-        ArrOfReversedCards.forEach(item => item.dataset.bgnumber = `100`);
-        ArrOfReversedCards.length = 0;
-    }
+const checkReversed = (ArrOfReversedCards) => {
+    ArrOfReversedCards[0].dataset.bgnumber = `100`;
+    ArrOfReversedCards[1].dataset.bgnumber = `100`;
+    ArrOfReversedCards.shift();
+    ArrOfReversedCards.shift();
 }
 
 const showResults = () => {
